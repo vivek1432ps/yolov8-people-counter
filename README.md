@@ -1,12 +1,13 @@
 # YOLOv8 People-Counting System
 
-A Python and OpenCV demo that detects people in a video or webcam feed and displays the number of people detected in each frame.
+A Python, OpenCV, and Ultralytics YOLO demo that detects people in a video or webcam feed and displays the number of detections in each frame. Includes both a graphical interface and a command-line mode.
 
 ## Features
-- Video-file and webcam input
+- **GUI:** choose a video file or webcam, adjust the confidence threshold, preview detections, start/stop processing
 - Person detection with bounding boxes using Ultralytics YOLO
 - Per-frame people count overlay
-- Annotated video output saved to `outputs/people_counted.mp4`
+- Annotated video output saved to `outputs/people_counted.mp4` for video-file input
+- Optional command-line mode via `app.py`
 
 ## Requirements
 - Windows, macOS, or Linux
@@ -24,37 +25,38 @@ pip install -r requirements.txt
 
 If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in the current terminal, then activate again.
 
-## Run on a video
-Create a `media` folder and put your own video at `media/sample.mp4`. Then run:
+## Launch the graphical interface
+```powershell
+python gui.py
+```
+1. Click **Choose video…** to select an MP4, AVI, MOV, or MKV file, or click **Use webcam**.
+2. Adjust the confidence threshold if needed.
+3. Click **Start detection**. The first run downloads the pretrained `yolov8n.pt` model.
+4. Click **Stop** to end processing.
+5. For video files, find the annotated result at `outputs/people_counted.mp4`.
+
+## Command-line alternative
 ```powershell
 python app.py --source media/sample.mp4
-```
-
-## Run on your webcam
-```powershell
 python app.py --source 0
-```
-
-Press `q` in the video window to stop. On the first run, Ultralytics downloads the pretrained `yolov8n.pt` weights.
-
-## Output
-Video results are written to `outputs/people_counted.mp4`. Do not commit large video files or model weights to GitHub unless you intentionally want to host them.
+``
+Press `q` in the OpenCV window to stop.
 
 ## Important limitation
 This starter counts detections in each frame. It does **not** count unique people across a whole video. A person can be counted in many frames. Unique entry/exit counting requires object tracking (such as ByteTrack or BoT-SORT) and a defined counting line.
 
 ## Screenshots for your portfolio
 Save real screenshots in a `screenshots/` directory:
-1. `01_detection.png` — running video with bounding boxes and people count.
-2. `02_terminal.png` — terminal command and successful execution.
+1. `01_gui.png` — GUI with a video selected.
+2. `02_detection.png` — GUI showing bounding boxes and the current frame count.
 3. `03_output.png` — a frame from the saved annotated video.
 
-Use `Win + Shift + S` on Windows to capture screenshots. Only add screenshots from a run you have actually completed.
+Use `Win + Shift + S` on Windows. Only add screenshots from a run you have actually completed.
 
 ## Resume description
-**YOLOv8 People-Counting System | Python, OpenCV, Ultralytics YOLO**
-- Built a computer-vision demo for detecting people in video and webcam feeds using a pretrained YOLO model.
-- Added bounding-box visualization, per-frame detection counts, command-line input selection, and annotated-video export.
+**YOLOv8 People-Counting System | Python, Tkinter, OpenCV, Ultralytics YOLO**
+- Built a GUI-based computer-vision demo to detect people in video and webcam feeds.
+- Added input selection, configurable confidence threshold, live preview, per-frame count, and annotated-video export.
 
 ## License
 Review Ultralytics licensing terms before commercial deployment: https://www.ultralytics.com/license
