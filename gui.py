@@ -95,6 +95,7 @@ class PeopleCounterGUI:
             messagebox.showinfo("Select input", "Choose a video file or select the webcam first.")
             return
         self.stop_event.clear()
+        self.current_confidence = float(self.confidence.get())
         self.running = True
         self.start_button.configure(state="disabled")
         self.stop_button.configure(state="normal")
@@ -135,7 +136,7 @@ class PeopleCounterGUI:
                 if not ok:
                     break
                 result = model.predict(
-                    source=frame, classes=[0], conf=float(self.confidence.get()), verbose=False
+                    source=frame, classes=[0], conf=self.current_confidence, verbose=False
                 )[0]
                 annotated = result.plot()
                 count = 0 if result.boxes is None else len(result.boxes)
